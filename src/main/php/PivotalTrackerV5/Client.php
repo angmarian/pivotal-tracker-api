@@ -61,7 +61,7 @@ class Client
     public function addStory( array $story  )
     {
       
-        return json_decode(
+        return $this->processResponse(
             $this->client->post(
                 "/projects/{$this->project}/stories",
                 json_encode( $story )
@@ -98,7 +98,7 @@ class Client
      */
     public function addLabels( $storyId, array $labels )
     {
-        return json_decode(
+        return $this->processResponse(
             $this->client->put(
                 "/projects/{$this->project}/stories/$storyId",
                 json_encode(  $labels )
@@ -114,7 +114,7 @@ class Client
      */
     public function getStories( $filter = null )
     {
-        return json_decode(
+        return $this->processResponse(
             $this->client->get(
                 "/projects/{$this->project}/stories",
                 $filter ? array( 'filter' => $filter ) : null
@@ -129,12 +129,24 @@ class Client
      */
     public function getProjects()
     {
-        return json_decode(
+        return $this->processResponse(
             $this->client->get(
                 "/projects"
             )
         );
 
+    }
+
+    /**
+     * Returs json decoded respose in an array instead of std objects
+     *
+     * $param response std class object
+     * @return array
+     *
+     */
+
+    protected function processResponse($response){
+        return json_decode($response,true);
     }
 
      
