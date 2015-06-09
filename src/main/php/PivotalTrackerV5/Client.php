@@ -162,6 +162,20 @@ class Client
         );
     }
 
+
+    public function getProjectIdByName( $name )
+    {
+        $projects = $this->getProjects();
+
+        $project = null;
+        foreach ($projects as $item) {
+            if ($item['name'] == $name) return $item['id'];
+        }
+
+        return false;
+    }
+
+
     /**
      * Returns a list of projects for the currently authenticated user.
      *
