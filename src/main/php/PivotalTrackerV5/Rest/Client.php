@@ -86,10 +86,11 @@ class Client
     /**
      * Adds an additional request header (simple way)
      *
+     * @param string $name
      * @param string $header
      * @return void
      */
-    public function addSimpleHeader( $header )
+    public function addSimpleHeader( $name, $header )
     {
         $this->header[$name] = "{$header}";
     }
