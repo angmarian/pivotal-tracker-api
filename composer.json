@@ -1,11 +1,16 @@
 {
-    "name":         "izap/pivotal-tracker-api",
+    "name":         "angmarian/pivotal-tracker-api",
     "description":  "Library that provides a PHP interface to interact with the PivotalTracker API V5",
-    "homepage":     "https://github.com/izap/pivotal-tracker-api",
+    "homepage":     "https://github.com/angmarian/pivotal-tracker-api",
     "keywords":     ["pivotaltracker", "api", "v5"],
     "license":      "LGPL",
     "type":         "library",
     "authors": [
+        {
+           "name" : "Paul Drozd",
+           "email" : "paul.drozd@gmail.com",
+           "homepage" : "http://paul.drozd.in.ua/"
+        },
         {
            "name" : "Tarun Jangra",
            "email" : "tarun@izap.in",
