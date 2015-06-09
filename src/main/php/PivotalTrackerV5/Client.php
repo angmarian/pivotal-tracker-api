@@ -56,12 +56,15 @@ class Client
             $this->client->get('/me')
         );
 
-        // 2DO: Перевірка на успішність авторизації
-        var_dump($info);
+        if (empty($info['api_token'])) {
+            throw new Exception("Request error, cannot obtain API Token");
+
+        }
+
         $this->apiKey = $info['api_token'];
 
         $this->client->addHeader( 'X-TrackerToken',  $this->apiKey );
-        $this->project = $project;
+
     }
 
     public function setProject($project)
