@@ -50,13 +50,14 @@ class Client
         $this->client = new Rest\Client( self::API_URL );
         $this->client->addHeader( 'Content-type', 'application/json' );
 
-        $this->client->addSimpleHeader( "Authorization: Basic " . base64_encode("$username:$password") );
+        $this->client->addHeader( "Authorization", " Basic " . base64_encode("$username:$password") );
 
         $info = $this->processResponse(
             $this->client->get('/me')
         );
 
         // 2DO: Перевірка на успішність авторизації
+        var_dump($info);
         $this->apiKey = $info['api_token'];
 
         $this->client->addHeader( 'X-TrackerToken',  $this->apiKey );
