@@ -36,7 +36,7 @@ class Client
      */
     private $client;
 
-    private $apiKey = $apiKey;
+    private $apiKey;
 
 
     /**
