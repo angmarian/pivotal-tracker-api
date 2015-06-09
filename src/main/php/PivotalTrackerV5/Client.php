@@ -146,6 +146,22 @@ class Client
         );
     }
 
+
+    /**
+     * Returns story by its id.
+     *
+     * @param integer $id
+     * @return object
+     */
+    public function getStory( $id )
+    {
+        return $this->processResponse(
+            $this->client->get(
+                "/projects/{$this->project}/stories/{$id}"
+            )
+        );
+    }
+
     /**
      * Returns a list of projects for the currently authenticated user.
      *
