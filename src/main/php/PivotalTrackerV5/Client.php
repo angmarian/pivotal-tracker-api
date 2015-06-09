@@ -107,7 +107,7 @@ class Client
     {
 
         return $this->processResponse(
-            $this->client->post(
+            $this->client->put(
                 "/projects/{$this->project}/stories/{$id}",
                 json_encode( $story )
             )
