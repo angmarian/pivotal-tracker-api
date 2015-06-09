@@ -84,6 +84,17 @@ class Client
     }
 
     /**
+     * Adds an additional request header (simple way)
+     *
+     * @param string $header
+     * @return void
+     */
+    public function addSimpleHeader( $header )
+    {
+        $this->header[$name] = "{$header}";
+    }
+
+    /**
      * Execute a HTTP GET request to the remote server
      *
      * Returns the raw response from the remote server.

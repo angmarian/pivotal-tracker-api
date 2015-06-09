@@ -35,20 +35,40 @@ class Client
      * @var \PivotalTracker\Rest\Client
      */
     private $client;
+
+    private $apiKey = $apiKey;
+
+
     /**
-     * 
+     *
      * @param string $apiKey  API Token provided by PivotalTracking
      * @param string $project Project ID
      */
-    public function __construct( $apiKey, $project )
+    public function __construct( $username, $password )
     {
+
         $this->client = new Rest\Client( self::API_URL );
         $this->client->addHeader( 'Content-type', 'application/json' );
-        $this->client->addHeader( 'X-TrackerToken',  $apiKey );
+
+        $this->client->addSimpleHeader( "Authorization: Basic " . base64_encode("$username:$password") );
+
+        $info = $this->processResponse(
+            $this->client->get('/me')
+        );
+
+        // 2DO: Перевірка на успішність авторизації
+        $this->apiKey = $info['api_token'];
+
+        $this->client->addHeader( 'X-TrackerToken',  $this->apiKey );
         $this->project = $project;
     }
 
- 
+    public function setProject($project)
+    {
+        $this->project = $project;
+    }
+
+
     /**
      * Adds a new story to PivotalTracker and returns the newly created story
      * object.
@@ -60,7 +80,7 @@ class Client
      */
     public function addStory( array $story  )
     {
-      
+
         return $this->processResponse(
             $this->client->post(
                 "/projects/{$this->project}/stories",
@@ -83,7 +103,7 @@ class Client
             $this->client->post(
                 "/projects/{$this->project}/stories/$storyId/tasks",
                 json_encode( array( 'description' => $description ) )
-                
+
             )
         );
     }
@@ -149,5 +169,5 @@ class Client
         return json_decode($response,true);
     }
 
-     
+
 }
