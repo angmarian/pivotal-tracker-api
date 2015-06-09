@@ -94,6 +94,27 @@ class Client
     }
 
     /**
+     * Updates the story on PivotalTracker and returns its
+     * object.
+     *
+     * @param integer $id
+     * @param array $story
+     * @param string $name
+     * @param string $description
+     * @return object
+     */
+    public function updateStory( $id, array $story  )
+    {
+
+        return $this->processResponse(
+            $this->client->post(
+                "/projects/{$this->project}/stories/{$id}",
+                json_encode( $story )
+            )
+        );
+    }
+
+    /**
      * Adds a new task with <b>$description</b> to the story identified by the
      * given <b>$storyId</b>.
      *
