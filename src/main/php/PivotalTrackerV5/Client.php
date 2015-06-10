@@ -57,13 +57,14 @@ class Client
         );
 
         if (empty($info['api_token'])) {
-            throw new Exception("Request error, cannot obtain API Token");
-
+            return false;
         }
 
         $this->apiKey = $info['api_token'];
 
         $this->client->addHeader( 'X-TrackerToken',  $this->apiKey );
+
+        return true;
 
     }
 
