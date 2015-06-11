@@ -44,28 +44,15 @@ class Client
      * @param string $apiKey  API Token provided by PivotalTracking
      * @param string $project Project ID
      */
-    public function __construct( $username, $password )
+    public function __construct( $apiKey, $project = null)
     {
-
         $this->client = new Rest\Client( self::API_URL );
         $this->client->addHeader( 'Content-type', 'application/json' );
+        $this->client->addHeader( 'X-TrackerToken',  $apiKey );
 
-        $this->client->addHeader( "Authorization", " Basic " . base64_encode("$username:$password") );
-
-        $info = $this->processResponse(
-            $this->client->get('/me')
-        );
-
-        if (empty($info['api_token'])) {
-            return false;
+        if ($project) {
+            $this->project = $project;
         }
-
-        $this->apiKey = $info['api_token'];
-
-        $this->client->addHeader( 'X-TrackerToken',  $this->apiKey );
-
-        return true;
-
     }
 
     public function setProject($project)
