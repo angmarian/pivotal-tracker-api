@@ -29,9 +29,8 @@
     ],
 
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.3.0"
     },
-
     "autoload": {
         "psr-0": {
             "PivotalTrackerV5": "src/main/php/"
