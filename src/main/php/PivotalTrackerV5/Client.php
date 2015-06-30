@@ -191,6 +191,9 @@ class Client
             if ($item['name'] == $name) return $item['id'];
         }
 
+        error_log('Cannot found project with name "' . $name . '".');
+        throw new \Exception('Cannot found project with name "' . $name . '".');
+
         return false;
     }
 
