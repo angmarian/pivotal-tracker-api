@@ -176,6 +176,11 @@ class Client
     {
         $projects = $this->getProjects();
 
+        if (empty($projects)) {
+            error_log("Cannot found any projects with this credentials.");
+            throw new \Exception("Cannot found any projects with this credentials.");
+        }
+
         $project = null;
         foreach ($projects as $item) {
             if ($item['name'] == $name) return $item['id'];
