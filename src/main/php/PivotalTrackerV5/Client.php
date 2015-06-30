@@ -176,6 +176,11 @@ class Client
     {
         $projects = $this->getProjects();
 
+        if (!empty($projects['error'])) {
+            error_log($projects['error']);
+            throw new \Exception($projects['error']);
+        }
+
         if (empty($projects)) {
             error_log("Cannot found any projects with this credentials.");
             throw new \Exception("Cannot found any projects with this credentials.");
